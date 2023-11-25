@@ -5,7 +5,6 @@ from controller.func import *
 from controller.validators import is_valid_email
 from model.users import User
 from model.forms import *
-from datetime import timedelta
 
 
 app = Flask(__name__)
