@@ -1,0 +1,42 @@
+{% block stylesheets %}
+    <link href="/static/css/header.css" rel="stylesheet" />
+    <!-- <link href="/static/css/navigation-site.css" rel="stylesheet" /> -->
+{% endblock stylesheets %}
+
+<header>
+    <div id="nav-bar">
+      <div id="nav-belt" class="nav-fill">
+        <div class="nav-left" id="nav-logo">
+          <a href="/">LOGO</a>
+        </div>
+  
+        <div id="nav-search" class="nav-fill">
+          <form id="nav-search-bar-form" class="nav-fill">
+            <div class="nav-left">
+              <a href="#">ALL</a>
+            </div>
+  
+            <div class="nav-fill"> 
+              <input type="text">
+            </div>
+  
+            <div class="nav-right">
+              <button type="submit">Search</button>
+            </div>
+          </form>
+        </div>
+  
+        <div class="nav-right" id="nav-tools">
+          <a href="/">Language</a>
+          <a href="/">Log in</a>
+          <a href="/">Cart</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  
+{% block javascripts %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="/static/js/navigation-site.js"></script>
+{% endblock javascripts %}

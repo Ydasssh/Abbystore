@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/css/login.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <title>Login</title>
+</head>
+
+<body>
+
+    <div class="containerLogin">
+        <form method="POST" class="login-form">
+            {{ form.hidden_tag() }}
+            <h2>Login</h2>
+            <div class="input-box">
+                {{ form.correo(size=20, placeholder="Correo Electrónico") }}
+            </div>
+            <div class="input-box">
+                {{ form.contraseña(size=20, placeholder="Contraseña") }}
+            </div>
+            <button type="submit" class="btn btn-primary">Iniciar Sesión</button>
+            <p class="small-text">¿No tienes una cuenta? <a href="{{ url_for('registrar') }}">Regístrate</a></p>
+        </form>
+    </div>
+    
+
+
+    {% if error %}
+    <script>
+        alert2('Correo o contraseña incorrecta','error');
+    </script>
+    {% endif %}
+    
+
+    <script src="/static/js/alert2.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+
+        {% for category, message in messages %}
+
+            {% if category == 'error' %}
+                <script>
+                    alert2('{{ message }}','error');
+                </script>>
+            {% endif %}
+
+        {% endfor %}
+    {% endwith %}
+
+    
+</body>
+
+</html>

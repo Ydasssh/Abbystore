@@ -1,0 +1,134 @@
+{% block stylesheets %}
+
+{% endblock stylesheets %}
+
+
+    <!-- offcanvas -->
+    <div
+      class="offcanvas offcanvas-start sidebar-nav bg-dark"
+      tabindex="-1"
+      id="sidebar"
+    >
+      <div class="offcanvas-body p-0">
+        <nav class="navbar-dark">
+          <ul class="navbar-nav">
+            <li>
+              <div class="text-muted small fw-bold text-uppercase px-3">
+                CORE
+              </div>
+            </li>
+            <li>
+              <a href="#" class="nav-link px-3 active">
+                <span class="me-2"><i class="bi bi-speedometer2"></i></span>
+                <span>Dashboard</span>
+              </a>
+            </li>
+            <li>
+              <a
+                class="nav-link px-3 sidebar-link"
+                data-bs-toggle="collapse"
+                href="#Gestion"
+              >
+                <span class="me-2"><i class="bi bi-gear"></i></span>
+                <span>Gestión</span>
+                <span class="ms-auto">
+                  <span class="right-icon">
+                    <i class="bi bi-chevron-down"></i>
+                  </span>
+                </span>
+              </a>
+              <div class="collapse" id="Gestion">
+                <ul class="navbar-nav ps-3">
+                  <li>
+                    <a href="#" class="nav-link px-3">
+                      <span class="me-2"
+                        ><i class="bi bi-people"></i
+                      ></span>
+                      <span>Usuarios</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#" class="nav-link px-3">
+                      <span class="me-2"
+                        ><i class="bi bi-bag"></i
+                      ></span>
+                      <span>Productos</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </li>
+
+            <li>
+                <a
+                  class="nav-link px-3 sidebar-link"
+                  data-bs-toggle="collapse"
+                  href="#reportes"
+                >
+                  <span class="me-2"><i class="bi bi-file-text"></i></span>
+                  <span>Reportes</span>
+                  <span class="ms-auto">
+                    <span class="right-icon">
+                      <i class="bi bi-chevron-down"></i>
+                    </span>
+                  </span>
+                </a>
+                <div class="collapse" id="reportes">
+                  <ul class="navbar-nav ps-3">
+                    <li>
+                      <a href="#" class="nav-link px-3">
+                        <span class="me-2"
+                          ><i class="bi bi-people"></i
+                        ></span>
+                        <span>Usuarios</span>
+                      </a>
+                    </li>
+                    <li>
+                        <a href="#" class="nav-link px-3">
+                          <span class="me-2"
+                            ><i class="bi bi-wallet"></i
+                          ></span>
+                          <span>Ventas</span>
+                        </a>
+                      </li>
+                    <li>
+                      <a href="#" class="nav-link px-3">
+                        <span class="me-2"
+                          ><i class="bi bi-box"></i
+                        ></span>
+                        <span>Productos</span>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </li>
+
+
+
+
+            <li>
+              <a href="#" class="nav-link px-3">
+                <span class="me-2"><i class="bi bi-file-earmark"></i></span>
+                <span>Contacto</span>
+              </a>
+            </li>
+
+
+            <li>
+                <a href="#" class="nav-link px-3">
+                  <span class="me-2"><i class="bi bi-file-earmark"></i></span>
+                  <span>Presentación</span>
+                </a>
+              </li>
+
+
+
+          </ul>
+        </nav>
+      </div>
+    </div>
+    <!-- offcanvas -->
+
+{% block javascripts %}
+
+{% endblock javascripts %}

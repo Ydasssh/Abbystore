@@ -1,0 +1,19 @@
+{% extends 'layouts/base-admin.html' %} 
+
+{% block title %} Abby Store - dashboard {% endblock title %}
+
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block body_class %} {% endblock body_class %} 
+
+
+
+
+{% block content %} 
+
+{% endblock content %} 
+
+
+{% block javascripts %} 
+
+{% endblock javascripts %} 

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+         // Obtén el valor de la cookie 'access_token'
+        const tokenCookie = document.cookie.split('; ').find(row => row.startsWith('access_token='));
+        const token = tokenCookie ? tokenCookie.split('=')[1] : null;
+
+        // Muestra el token en la consola del navegador
+        console.log('Token JWT:', token);
+    </script>
+
+
+    <h1>Pagina prueba token</h1>
+
+</body>
+</html>

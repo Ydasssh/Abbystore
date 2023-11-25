@@ -1,0 +1,52 @@
+{% extends 'layouts/base.html' %} 
+
+{% block title %} Abby Store - presentación {% endblock title %}
+
+{% block stylesheets %}
+
+<link rel="stylesheet" href="/static/css/base.css">
+
+{% endblock stylesheets %}
+
+{% block body_class %} min-vh-100 {% endblock body_class %} 
+
+
+
+
+{% block content %} 
+
+
+<section class="c-home text-center bg-warning">
+<!-- carrusel -->
+
+<h2 class="text-light">aca irá un carrusel</h2>
+</section>
+
+<hr>
+
+<div style="height: 1fr">
+    <!-- just to make scrolling effect possible -->
+    <h2 class="myH2 mt-8 mb-8">Pagina de inicio usuarios</h2>
+                
+</div>
+
+{% endblock content %} 
+
+{% block javascripts %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="/static/js/alert2.js"></script>
+
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% for category, message in messages %}
+        {% if category == 'success' %}
+            <script>
+                console.log("Entra al script");
+                alert2('{{ message }}', 'success');
+            </script>
+        {% endif %}
+    {% endfor %}
+{% endwith %}
+{% endblock javascripts %}
+
+

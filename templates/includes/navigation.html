@@ -1,0 +1,27 @@
+{% block stylesheets %} <link href="/static/css/navigation.css" rel="stylesheet" />{% endblock stylesheets %}
+
+<nav class="nav">
+    <div class="container">
+        <div id="mainListDiv" class="main_list">
+            <ul class="navlinks">
+                <li><a href="#">Nosotros</a></li>
+                <li><a href="#">Tienda</a></li>
+                <li><a href="#">Contacto</a></li>
+                <li><a href="{{url_for('login')}}">Login</a></li>
+                <li><a href="{{url_for('registrar')}}">Signup</a></li>
+            </ul>
+        </div>
+        <span class="navTrigger">
+            <i></i>
+            <i></i>
+            <i></i>
+        </span>
+    </div>
+</nav>
+
+{% block javascripts %}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="/static/js/navigation.js"></script>
+
+{% endblock javascripts %} 

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/css/registro.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <title>Registro</title>
+</head>
+
+<body>
+
+
+    <div class="containerRegister">
+        <div class="form-box">
+            <form action="{{ url_for('registrar') }}" method='POST' autocomplete="off" name="FormfillRegister" onsubmit="return validationRegister()">
+                {{ form.hidden_tag() }}
+                <h2>Register</h2>
+                <div class="input-box">
+                    <i class='bx bxs-user'></i>
+                    {{ form.nombre_usuario(size=20, class="input", placeholder="Nombre de usuario") }}<br>
+                    {% for error in form.nombre_usuario.errors %}
+                        <span class="error-message">{{ error }}</span><br>
+                    {% endfor %}
+                </div>
+                <div class="input-box">
+                    <i class='bx bxs-envelope'></i>
+                    {{ form.correo(size=20, class="input", placeholder="Correo electrónico") }}
+                    {% for error in form.correo.errors %}
+                        <span class="error-message">{{ error }}</span><br>
+                    {% endfor %}
+                </div>
+                <div class="input-box">
+                    <i class='bx bxs-lock-alt'></i>
+                    {{ form.contraseña(size=20, class="input", placeholder="Contraseña") }}<br>
+                    {% for error in form.contraseña.errors %}
+                        <span class="error-message">{{ error }}</span><br>
+                    {% endfor %}
+                </div>
+                <div class="input-box">
+                    <i class='bx bxs-lock-alt'></i>
+                    {{ form.confirmar_contraseña(size=20, class="input", placeholder="Confirmar contraseña") }}<br>
+                    {% for error in form.confirmar_contraseña.errors %}
+                        <span class="error-message">{{ error }}</span><br>
+                    {% endfor %}
+                </div>
+                <div class="button">
+                    {{ form.submit(class="btn") }}
+                </div>
+                <div class="group">
+                    <span><a href="#">Forgot-password</a></span>
+                    <span><a href="{{url_for('login')}}">Login</a></span>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="/static/js/login-register.js"></script>
+    <script src="/static/js/alert2.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% for category, message in messages %}
+        {% if category == 'error' %}
+        <script>
+            alert2('{{ message }}','error');
+        </script>>
+        {% endif %}
+        {% if category == 'success' %}
+        <script>
+            alert2('{{ message }}','success');
+        </script>
+        {% endif %}
+        {% endfor %}
+    {% endwith %}
+    
+</body>
+
+</html>
