@@ -11,12 +11,102 @@
 
 {% block content %} 
 
+    <div class="row">
+        <div class="col-md-12 p-2 text-center">
+            <h1>Gestión de usuarios</h1>
+        </div>
+    </div>
 
+    <div class="row">
+        <div class="col-md-12 p-2">
+            .<a name="" id="" class="btn btn-success" href="#" role="button">Agregar usuario</a>
+        </div>
+    </div>
+
+
+
+    <div class="row">
+        <div class="col-md-12 p-1">
+            <div class="row">
+                <div class="col-md-12 mb-3">
+                  <div class="card">
+                    <div class="card-body">
+                      <div class="table-responsive">
+                        <table
+                          id="datatable"
+                          class="table table-striped data-table"
+                          style="width: 100%"
+                        >
+                        <thead>
+                            <tr>  
+                              <th>Acciones</th>
+                              <th>Código</th>
+                              <th>Nombres</th>
+                              <th>Apellidos</th>
+                              <th>Dirección</th>
+                              <th>Departamento</th>
+                              <th>Ciudad</th>
+                              <th>Correo</th>
+                              <th>Teléfono</th>
+                              <th>Nombre Usuario</th>
+                              <th>Rol</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {% for usuario in usuarios %}
+                              <tr>
+                                <td>
+                                    <div class="btn-group">
+                                        <!-- Botón de Ver -->
+                                        <a href="" class="btn btn-info btn-sm">
+                                          <i class="bi bi-eye"></i>
+                                        </a>
+                                        
+                                        <!-- Botón de Editar -->
+                                        <a href="" class="btn btn-warning btn-sm">
+                                          <i class="bi bi-pencil"></i>
+                                        </a>
+                                        
+                                        <!-- Botón de Eliminar -->
+                                        <a href="" class="btn btn-danger btn-sm">
+                                          <i class="bi bi-trash"></i>
+                                        </a>
+                                      </div>
+                                </td>
+                                <td>{{ usuario['codigo'] }}</td>
+                                <td>{{ usuario['nombres'] }}</td>
+                                <td>{{ usuario['apellidos'] }}</td>
+                                <td>{{ usuario['direccion'] }}</td>
+                                <td>{{ usuario['departamento'] }}</td>
+                                <td>{{ usuario['ciudad'] }}</td>
+                                <td>{{ usuario['correo'] }}</td>
+                                <td>{{ usuario['telefono'] }}</td>
+                                <td>{{ usuario['nombre_usuario'] }}</td>
+                                <td>{{ usuario['rol'] }}</td>
+                              </tr>
+                            {% endfor %}
+                          </tbody>
+
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-md-12 bg-danger">
+            
+        </div>
+    </div>
 
 
 {% endblock content %} 
 
 
 {% block javascripts %} 
+
+<script src="/static/js/datatable-usuarios.js"></script>
 
 {% endblock javascripts %} 

@@ -17,7 +17,7 @@ class User:
         
     def get_all_usuarios():
         conexion = Conexion.connection_bd()
-        cursor = conexion.cursor()
+        cursor = conexion.cursor(dictionary=True)
         cursor.execute("SELECT * FROM `usuarios`")
         lista_usuarios = cursor.fetchall()
         conexion.commit()

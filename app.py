@@ -8,8 +8,8 @@ from model.forms import *
 
 
 app = Flask(__name__)
-app.secret_key = 'Pussyss2003*'
-app.config['JWT_SECRET_KEY'] = 'Pussyss2003*'  
+app.secret_key = 'ak47op7COD*'
+app.config['JWT_SECRET_KEY'] = 'ak47op7COD'  
 app.config['JWT_TOKEN_LOCATION'] = ['headers', 'cookies']
 app.config['SESSION_COOKIE_SECURE'] = True 
 jwt = JWTManager(app)
@@ -17,7 +17,7 @@ jwt = JWTManager(app)
 
 @jwt.unauthorized_loader
 def unauthorized_callback(callback):
-    return "Redireccion sin token"
+    return render_template('auth/no-token.html')
 
 
 @app.route('/', methods=['GET'])
@@ -29,8 +29,6 @@ def presentacion():
 @app.route('/registro', methods=['GET', 'POST'])
 def registrar():
     form = FormularioRegistro()
-    # print("form---------", form.data)
-    
     
     if request.method == 'POST':
     
@@ -50,16 +48,11 @@ def registrar():
         
         ciudad = form.data['ciudad']
         departamento = form.data['departamento']
-        
-        print(form.validate_on_submit())
 
         if form.validate():
             
-            print("Form validate on submit")
-            
             codigo = generar_codigo_usuario().upper()
-            
-            print("codigo",codigo)
+
 
             usuario = User(
             codigo=codigo,
@@ -74,23 +67,15 @@ def registrar():
             contraseña=form.contraseña.data,
             rol="user"
             )
-            
-            print("codigo -------------------",usuario.codigo)
 
 
             if not is_valid_email(usuario.correo):
-                print("Email invalido")
                 flash('Ingrese un correo válido', 'error')
                 return render_template('pages/registro.html', form=form)
 
             contraseña_hasheada = hashear_contraseña(usuario.contraseña)
-            print("Hasea contraseña")
 
-            usuario.contraseña = contraseña_hasheada
-            print("Define hash contraseña")
-            
-            
-            
+            usuario.contraseña = contraseña_hasheada   
             if User.registrar_usuario(usuario):
                 print("TODO CORRECTO")
                 response = flash('Registro exitoso. ¡Ahora puedes iniciar sesión!', 'success')
@@ -120,10 +105,11 @@ def login():
     
             user = is_valid_login(correo, contraseña)
             
-            print("USER ROL------------------", user['rol'])
+            # print("USER ROL------------------", user['rol'])
+            rol = user['rol']
     
             if user:
-                access_token = create_access_token(identity=correo,additional_claims={'rol':user['rol']})
+                access_token = create_access_token(identity={'correo': correo, 'rol': rol})
                 response = redirect(url_for('inicio'))
                 response.set_cookie('access_token_cookie', access_token, 10 ,secure=True, httponly=True)
                 flash(f'Bienvenido usuario', 'success')
@@ -139,35 +125,63 @@ def login():
 @jwt_required()
 def inicio():
     
-    # print("IDENTITY_____________________________",get_jwt_identity())  # Verifica qué información está disponible en el token
-    # rol = get_jwt_identity().get('rol')
-    # print(f'Rol del usuario: {rol}')
+    print("IDENTITY_____________________________",get_jwt_identity())  # Verifica qué información está disponible en el token
+    rol = get_jwt_identity().get('rol')
+    print(f'Rol del usuario: {rol}')
     
+    if rol == 'user':
+        return render_template('pages/inicio-users.html')
     
-    # if rol == 'user':
-    #     return "ROL: Usuario"
-    # elif rol == 'admin':
-    #     return "ROL: Admin"
-    
-    
-    
-    # current_user = get_jwt_identity()
-    # print(f'Usuario actual: {current_user}')
     
 
     # print("Session: ", session)
     
-    return render_template('pages/inicio-users.html')
+    return render_template('auth/acceso-denegado.html')
 
 @app.route('/admin')
+@jwt_required()
 def dashboard():
+    rol = get_jwt_identity().get('rol')
     
-    return render_template('pages/dashboard.html')
+    if rol == 'admin':
+        return render_template('pages/inicio-users.html')
+    
+    return render_template('auth/acceso-denegado.html')
 
-@app.route('/usuarios')
+
+@app.route('/admin/usuarios')
+@jwt_required()
 def gestion_usuarios():
+    rol = get_jwt_identity().get('rol')
     
-    return render_template('pages/gestion-usuario.html.html')
+    if rol == 'admin':
+        usuarios = User.get_all_usuarios()
+
+        loop = asyncio.new_event_loop()
+        asyncio.set_event_loop(loop)
+        ciudades, departamentos = loop.run_until_complete(obtener_datos_asincronos(usuarios))
+
+        data_usuarios = []
+
+        for usuario, ciudad, departamento in zip(usuarios, ciudades, departamentos):
+            usuario_dict = {
+                'codigo': usuario['codigo'],
+                'nombres': usuario['nombres'],
+                'apellidos': usuario['apellidos'],
+                'direccion': usuario['direccion'],
+                'departamento': departamento if departamento is not None else "No disponible",
+                'ciudad': ciudad if ciudad is not None else "No disponible",
+                'correo': usuario['correo'],
+                'telefono': usuario['telefono'],
+                'nombre_usuario': usuario['nombre_usuario'],
+                'rol': usuario['rol']
+            }
+            data_usuarios.append(usuario_dict)
+
+        if data_usuarios:
+            return render_template('pages/gestion-usuario.html', usuarios=data_usuarios)
+    
+    return render_template('auth/acceso-denegado.html')
 
 # @app.route('/prueba')
 # def prueba():
