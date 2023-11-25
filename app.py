@@ -140,7 +140,7 @@ def login():
 @jwt_required()
 def inicio():
     
-    print("IDENTITY_____________________________",get_jwt_identity())  # Verifica qué información está disponible en el token
+    # print("IDENTITY_____________________________",get_jwt_identity())  # Verifica qué información está disponible en el token
     # rol = get_jwt_identity().get('rol')
     # print(f'Rol del usuario: {rol}')
     
